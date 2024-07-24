@@ -28,7 +28,11 @@ class BaseResponseHelper:
 		return self
 
 	def base_validate_response(self):
-		if self.response_status == 200:
+		if not self.response_json:
+			pytest.fail(f'{BaseErrorMessages.WRONG_RESPONSE_EMPTY}\n'
+			            f'Response body: {self.response_json}')
+
+		if self.response_status:
 			if isinstance(self.response_json, dict):
 				self.schema(**self.response_json)
 

@@ -29,5 +29,6 @@ def test_action_add():
 
 	response = CarResponseHelper(response=res, schema=CarSchema)
 	response.assert_status_code(expected_status_code=200)
+	response.base_validate_response()
 	response.validate_action_add_response(make=CarBrand.volkswagen.value,
 	                                      model=CarModel.jetta.value)
